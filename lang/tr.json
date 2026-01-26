@@ -1,0 +1,20 @@
+{
+    "Dashboard": "Dashboard",
+    "Welcome": "Hoş Geldiniz",
+    "Login": "Giriş Yap",
+    "Register": "Kayıt Ol",
+    "Logout": "Çıkış Yap",
+    "Email": "E-posta",
+    "Password": "Şifre",
+    "Remember Me": "Beni Hatırla",
+    "Forgot Your Password?": "Şifrenizi mi unuttunuz?",
+    "Name": "İsim",
+    "Confirm Password": "Şifre Tekrar",
+    "Reset Password": "Şifre Sıfırla",
+    "Send Password Reset Link": "Şifre Sıfırlama Linki Gönder",
+    "Verify Email Address": "E-posta Adresinizi Doğrulayın",
+    "A fresh verification link has been sent to your email address.": "Yeni bir doğrulama linki e-posta adresinize gönderildi.",
+    "Before proceeding, please check your email for a verification link.": "Devam etmeden önce lütfen e-posta adresinizi kontrol edin.",
+    "If you did not receive the email": "E-posta almadıysanız",
+    "click here to request another": "yenisini talep etmek için tıklayın"
+}
