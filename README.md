@@ -21,8 +21,8 @@ Açık İstatistik Platformu - Ekonomik veriler için şeffaf, çok kaynaklı ve
 
 ### 1. Projeyi Klonlayın
 ```bash
-git clone https://github.com/yourusername/ose-platform.git
-cd ose-platform
+git clone https://github.com/metatronslove/open-statistics-platform.git
+cd open-statistics-platform
 ```
 
 ### 2. Bağımlılıkları Yükleyin
@@ -96,7 +96,7 @@ Seeding sonrasında oluşturulan kullanıcılar:
 ## 🏗️ Proje Yapısı
 
 ```
-ose-project/
+open-statistics-platform/
 ├── app/
 │   ├── Http/Controllers/
 │   │   ├── Admin/         # Admin kontrollerleri
@@ -176,4 +176,5 @@ Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICE
 
 ## 📞 İletişim
 
-Proje ile ilgili sorularınız için: [email@example.com](mailto:email@example.com)
+:) why ?
+
