@@ -1,0 +1,78 @@
+@import 'admin-lte/dist/css/adminlte.min.css';
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
+/* Custom styles */
+.sidebar-dark-primary {
+    background-color: #343a40 !important;
+}
+
+.content-wrapper {
+    min-height: calc(100vh - (3.5rem + 1px));
+}
+
+.main-footer {
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Chart container */
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
+/* Custom badges */
+.badge-outline {
+    background-color: transparent;
+    border: 1px solid;
+}
+
+/* Data point status */
+.status-verified {
+    color: #28a745;
+}
+
+.status-pending {
+    color: #ffc107;
+}
+
+.status-failed {
+    color: #dc3545;
+}
+
+/* Dataset cards */
+.dataset-card {
+    transition: transform 0.2s;
+}
+
+.dataset-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Responsive tables */
+.table-responsive {
+    min-height: 300px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
