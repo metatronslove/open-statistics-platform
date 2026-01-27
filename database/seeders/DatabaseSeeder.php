@@ -13,7 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             AdminUserSeeder::class,
-            SampleDatasetsSeeder::class,
+            SampleDataSeeder::class,
+            CalculationRulesSeeder::class,
         ]);
     }
 }
