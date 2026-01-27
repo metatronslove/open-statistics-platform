@@ -1,20 +1,111 @@
-@import 'admin-lte/dist/css/adminlte.min.css';
-@import 'bootstrap/dist/css/bootstrap.min.css';
-@import '@fortawesome/fontawesome-free/css/all.min.css';
+/* Open Statistics Platform - Main Stylesheet */
 
-/* Custom styles */
-.sidebar-dark-primary {
-    background-color: #343a40 !important;
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2c3e50;
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
+    --danger-color: #e74c3c;
+    --info-color: #17a2b8;
+    --light-color: #ecf0f1;
+    --dark-color: #2c3e50;
 }
 
-.content-wrapper {
-    min-height: calc(100vh - (3.5rem + 1px));
+/* Custom Styles */
+.small-box {
+    border-radius: 8px;
+    transition: transform 0.3s ease;
 }
 
-.main-footer {
-    padding: 1rem;
+.small-box:hover {
+    transform: translateY(-5px);
+}
+
+.small-box .icon {
+    font-size: 70px;
+    top: -10px;
+}
+
+/* Card improvements */
+.card {
+    box-shadow: 0 0 15px rgba(0,0,0,0.08);
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    background-color: #fff;
+    border-radius: 10px 10px 0 0 !important;
+}
+
+.card-title {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Button improvements */
+.btn {
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Table improvements */
+.table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table th {
     background-color: #f8f9fa;
-    border-top: 1px solid #dee2e6;
+    border-top: none;
+    font-weight: 600;
+    color: #495057;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+/* Badge improvements */
+.badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+/* Form improvements */
+.form-control {
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+/* Alert improvements */
+.alert {
+    border-radius: 8px;
+    border: none;
+}
+
+/* Code styling */
+code {
+    background-color: #f8f9fa;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #e74c3c;
+    font-size: 0.9em;
 }
 
 /* Chart container */
@@ -24,38 +115,67 @@
     width: 100%;
 }
 
-/* Custom badges */
-.badge-outline {
-    background-color: transparent;
-    border: 1px solid;
+/* Custom info boxes */
+.info-box {
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-/* Data point status */
-.status-verified {
-    color: #28a745;
+.info-box-icon {
+    border-radius: 8px 0 0 8px;
 }
 
-.status-pending {
-    color: #ffc107;
+/* Navigation improvements */
+.nav-pills .nav-link {
+    border-radius: 6px;
+    margin-bottom: 5px;
 }
 
-.status-failed {
-    color: #dc3545;
+/* Dashboard widgets */
+.callout {
+    border-radius: 8px;
+    border-left: 5px solid var(--primary-color);
 }
 
-/* Dataset cards */
-.dataset-card {
-    transition: transform 0.2s;
+.callout-info {
+    border-left-color: var(--info-color);
 }
 
-.dataset-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+.callout-success {
+    border-left-color: var(--success-color);
 }
 
-/* Responsive tables */
-.table-responsive {
-    min-height: 300px;
+.callout-warning {
+    border-left-color: var(--warning-color);
+}
+
+.callout-danger {
+    border-left-color: var(--danger-color);
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .small-box .icon {
+        font-size: 50px;
+        top: 0;
+    }
+    
+    .card-header .card-tools {
+        margin-top: 10px;
+        width: 100%;
+    }
+}
+
+/* Print styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    .card {
+        border: 1px solid #ddd;
+        box-shadow: none;
+    }
 }
 
 /* Custom scrollbar */
@@ -66,13 +186,140 @@
 
 ::-webkit-scrollbar-track {
     background: #f1f1f1;
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 4px;
+    background: #c1c1c1;
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: #a8a8a8;
+}
+
+/* Loading spinner */
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Utility classes */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.text-underline {
+    text-decoration: underline;
+}
+
+.opacity-75 {
+    opacity: 0.75;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
+.shadow-sm {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+.shadow-md {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important;
+}
+
+.shadow-lg {
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1) !important;
+}
+
+/* Data point status colors */
+.status-verified {
+    color: var(--success-color);
+}
+
+.status-pending {
+    color: var(--warning-color);
+}
+
+.status-failed {
+    color: var(--danger-color);
+}
+
+/* Dataset card colors */
+.dataset-public {
+    border-left: 4px solid var(--success-color);
+}
+
+.dataset-private {
+    border-left: 4px solid var(--secondary-color);
+}
+
+/* Provider trust score colors */
+.trust-high {
+    color: var(--success-color);
+}
+
+.trust-medium {
+    color: var(--warning-color);
+}
+
+.trust-low {
+    color: var(--danger-color);
+}
+
+/* Form validation states */
+.is-valid {
+    border-color: var(--success-color) !important;
+}
+
+.is-invalid {
+    border-color: var(--danger-color) !important;
+}
+
+/* Animation for new items */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease;
+}
+
+/* Toast notification style */
+.toast {
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.toast-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.toast-error {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.toast-warning {
+    background-color: var(--warning-color);
+    color: white;
+}
+
+.toast-info {
+    background-color: var(--info-color);
+    color: white;
 }

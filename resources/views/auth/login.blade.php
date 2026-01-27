@@ -1,149 +1,113 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Giriş Yap - Open Statistics Economy</title>
-    
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- AdminLTE -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
-</head>
-<body class="hold-transition login-page">
-<div class="login-box">
-    <div class="login-logo">
-        <a href="{{ route('home') }}">
-            <img src="https://adminlte.io/themes/v3/dist/img/AdminLTELogo.png" alt="OSE Logo" style="height: 50px;">
-            <br>
-            <b>Open Statistics</b> Economy
-        </a>
-    </div>
+@extends('layouts.app')
 
-    <div class="card">
-        <div class="card-body login-card-body">
-            <p class="login-box-msg">Sisteme giriş yapın</p>
+@section('title', 'Giriş Yap')
+@section('page_title', 'Giriş Yap')
 
-            @if($errors->any())
-                <div class="alert alert-danger">
-                    @foreach($errors->all() as $error)
-                        <p class="mb-0">{{ $error }}</p>
-                    @endforeach
-                </div>
-            @endif
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Giriş Yap') }}</div>
 
-            @if(session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
+                <div class="card-body">
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
 
-            <!-- Email/Password Login Form -->
-            <form method="POST" action="{{ route('login') }}">
-                @csrf
-                <div class="input-group mb-3">
-                    <input type="email" 
-                           name="email" 
-                           class="form-control @error('email') is-invalid @enderror" 
-                           placeholder="Email" 
-                           value="{{ old('email') }}" 
-                           required 
-                           autofocus>
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
+                        <div class="row mb-3">
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Adresi') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Şifre') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6 offset-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                    <label class="form-check-label" for="remember">
+                                        {{ __('Beni Hatırla') }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Giriş Yap') }}
+                                </button>
+
+                                @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('Şifrenizi mi unuttunuz?') }}
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <hr>
+                    
+                    <!-- OAuth Login Buttons -->
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <p class="mb-3">Veya sosyal medya hesaplarınızla giriş yapın:</p>
+                            
+                            <div class="d-flex justify-content-center gap-3">
+                                <a href="{{ route('auth.google') }}" class="btn btn-danger">
+                                    <i class="fab fa-google"></i> Google ile Giriş
+                                </a>
+                                <a href="{{ route('auth.github') }}" class="btn btn-dark">
+                                    <i class="fab fa-github"></i> GitHub ile Giriş
+                                </a>
+                                <a href="{{ route('auth.facebook') }}" class="btn btn-primary">
+                                    <i class="fab fa-facebook"></i> Facebook ile Giriş
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-
-                <div class="input-group mb-3">
-                    <input type="password" 
-                           name="password" 
-                           class="form-control @error('password') is-invalid @enderror" 
-                           placeholder="Şifre" 
-                           required>
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-12 text-center">
+                            <p>Hesabınız yok mu? 
+                                <a href="{{ route('register') }}">Kayıt Olun</a>
+                            </p>
                         </div>
                     </div>
-                    @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-
-                <div class="row">
-                    <div class="col-8">
-                        <div class="icheck-primary">
-                            <input type="checkbox" name="remember" id="remember">
-                            <label for="remember">
-                                Beni Hatırla
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">
-                            Giriş Yap
-                        </button>
-                    </div>
-                </div>
-            </form>
-
-            <hr>
-
-            <!-- Social Login Buttons -->
-            <p class="mb-2 text-center">Veya sosyal medya ile giriş yapın:</p>
-            
-            <div class="row">
-                <div class="col-12 mb-2">
-                    <a href="{{ route('auth.google') }}" class="btn btn-block btn-danger">
-                        <i class="fab fa-google mr-2"></i> Google ile Giriş
-                    </a>
-                </div>
-                <div class="col-12 mb-2">
-                    <a href="{{ route('auth.github') }}" class="btn btn-block btn-dark">
-                        <i class="fab fa-github mr-2"></i> GitHub ile Giriş
-                    </a>
-                </div>
-                <div class="col-12">
-                    <a href="{{ route('auth.facebook') }}" class="btn btn-block btn-primary">
-                        <i class="fab fa-facebook mr-2"></i> Facebook ile Giriş
-                    </a>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row">
-                <div class="col-12">
-                    <p class="mb-1 text-center">
-                        <a href="{{ route('password.request') }}">Şifremi unuttum</a>
-                    </p>
-                    <p class="mb-0 text-center">
-                        <a href="{{ route('register') }}" class="text-center">Yeni hesap oluştur</a>
-                    </p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
 
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
-</body>
-</html>
+@push('styles')
+<style>
+    .btn-danger, .btn-dark, .btn-primary {
+        width: 150px;
+    }
+</style>
+@endpush

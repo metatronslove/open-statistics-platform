@@ -4,33 +4,21 @@
 @section('page_title', 'Veri Setlerim')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item active">Veri Setlerim</li>
+    <li class="breadcrumb-item"><a href="{{ route('statistician.dashboard') }}">Dashboard</a></li>
+    <li class="breadcrumb-item active">Veri Setleri</li>
 @endsection
 
 @section('content')
 <div class="container-fluid">
-    <div class="row mb-3">
-        <div class="col-md-12">
-            <a href="{{ route('statistician.datasets.create') }}" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Yeni Veri Seti
-            </a>
-        </div>
-    </div>
-
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Tüm Veri Setlerim</h3>
+                    <h3 class="card-title">Tüm Veri Setleri</h3>
                     <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width: 250px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Ara...">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
+                        <a href="{{ route('statistician.datasets.create') }}" class="btn btn-success btn-sm">
+                            <i class="fas fa-plus"></i> Yeni Veri Seti
+                        </a>
                     </div>
                 </div>
                 <div class="card-body table-responsive p-0">
@@ -40,8 +28,9 @@
                                 <th>ID</th>
                                 <th>İsim</th>
                                 <th>Açıklama</th>
-                                <th>Veri Noktası</th>
                                 <th>Birim</th>
+                                <th>Veri Noktası</th>
+                                <th>Doğrulama</th>
                                 <th>Durum</th>
                                 <th>Oluşturulma</th>
                                 <th>İşlemler</th>
@@ -51,41 +40,37 @@
                             @foreach($datasets as $dataset)
                             <tr>
                                 <td>{{ $dataset->id }}</td>
-                                <td>
-                                    <a href="{{ route('statistician.datasets.show', $dataset) }}">
-                                        {{ $dataset->name }}
-                                    </a>
-                                </td>
+                                <td>{{ $dataset->name }}</td>
                                 <td>{{ Str::limit($dataset->description, 50) }}</td>
+                                <td>{{ $dataset->unit }}</td>
                                 <td>
                                     <span class="badge bg-info">{{ $dataset->data_points_count }}</span>
                                 </td>
-                                <td>{{ $dataset->unit }}</td>
                                 <td>
-                                    @if($dataset->is_public)
-                                        <span class="badge bg-success">Açık</span>
+                                    @if($dataset->calculation_rule)
+                                        <span class="badge bg-success">Kural Var</span>
                                     @else
-                                        <span class="badge bg-warning">Kapalı</span>
+                                        <span class="badge bg-secondary">Kural Yok</span>
                                     @endif
                                 </td>
-                                <td>{{ $dataset->created_at->format('d.m.Y H:i') }}</td>
+                                <td>
+                                    <span class="badge bg-{{ $dataset->is_public ? 'success' : 'secondary' }}">
+                                        {{ $dataset->is_public ? 'Açık' : 'Kapalı' }}
+                                    </span>
+                                </td>
+                                <td>{{ $dataset->created_at->format('d.m.Y') }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ route('statistician.datasets.show', $dataset) }}" 
-                                           class="btn btn-sm btn-info" title="Görüntüle">
+                                        <a href="{{ route('statistician.datasets.show', $dataset) }}" class="btn btn-info btn-sm">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a href="{{ route('statistician.datasets.edit', $dataset) }}" 
-                                           class="btn btn-sm btn-warning" title="Düzenle">
+                                        <a href="{{ route('statistician.datasets.edit', $dataset) }}" class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <form action="{{ route('statistician.datasets.destroy', $dataset) }}" 
-                                              method="POST" class="d-inline">
+                                        <form action="{{ route('statistician.datasets.destroy', $dataset) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" 
-                                                    onclick="return confirm('Bu veri setini silmek istediğinizden emin misiniz?')"
-                                                    title="Sil">
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bu veri setini silmek istediğinize emin misiniz?')">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </form>
@@ -96,7 +81,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="card-footer clearfix">
+                <div class="card-footer">
                     {{ $datasets->links() }}
                 </div>
             </div>
@@ -104,16 +89,3 @@
     </div>
 </div>
 @endsection
-
-@push('scripts')
-<script>
-    $(document).ready(function() {
-        $('input[name="table_search"]').on('keyup', function() {
-            var value = $(this).val().toLowerCase();
-            $('table tbody tr').filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-    });
-</script>
-@endpush
